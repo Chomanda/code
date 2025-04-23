@@ -1,0 +1,77 @@
+a) Write a python program to swap two numbers and check if the first number is positive, negative or zero.  
+Code:
+a = int(input("Enter 1st number: "))
+b = int(input("Enter 2nd number: "))
+
+
+print (f"before swapping: a = {a} and b = {b}")
+a,b = b,a
+print (f"After swapping: a = {a} and b = {b}")
+
+if (a>0):
+    print("1st no is positive")
+elif (a==0):
+    print("1st no is zero")
+else:
+    print("1st no is negative")
+
+b) Write a python program to print all the numbers divisible by 4 in the range 1 to n (use for loop).  
+Code:
+n = int(input("Enter Range: "))
+
+for i in range(1, n):
+    if( i % 4 == 0):
+        print(f"{i}")
+
+c) Write a python program to find the factorial of an input number (use while loop).  
+Code:
+n = int(input("Enter number: "))
+
+fact = 1
+i = 1
+
+while i <= n:
+    fact = fact * i
+    i += 1
+
+print(f"Factorial is {fact}")
+
+d) Write a menu-driven python program to build simple calculator functions.  
+Code:
+while True:
+    
+    print("\nMenu:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Exit")
+    choice = input("Enter your choice: ")
+    
+    if choice==5:
+        break
+    
+    x = float(input("Enter first number: "))
+    y = float(input("Enter second number: "))
+    
+    if choice=="1":
+        print (f"Sum = {x+y}")
+    
+    elif choice == "2":
+        print(f"Diff = {x-y}")
+        
+    elif choice == "3":
+        print(f"prod = {x*y}")
+        
+    elif choice == "4":
+        print(f"Division = {x/y}")
+        
+    else:
+        print("Invalid choice")
+
+e) Write a python program to display Fibonacci series of n number.
+Code:
+n = int(input("Enter the range: "))
+
+a = 0
+b = 1
+
+for i in range (0, n):
+    print (f"{a}")
+    a, b = b, a+b
+    i += 1
