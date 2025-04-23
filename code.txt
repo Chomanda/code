@@ -1,0 +1,139 @@
+import java.io.;
+import java.net.;
+
+public class TCPServer {
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(6789);
+        System.out.println("TCP Server is running...");
+
+        Socket connectionSocket = serverSocket.accept();
+        BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+
+        String clientSentence = inFromClient.readLine();
+        System.out.println("Received: " + clientSentence);
+
+        serverSocket.close();
+    }
+}
+
+
+
+import java.io.;
+import java.net.;
+import java.util.Scanner;
+
+public class TCPClient {
+    public static void main(String[] args) throws IOException {
+        Socket clientSocket = new Socket("localhost", 6789);
+        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter message to send: ");
+        String sentence = sc.nextLine();
+        outToServer.writeBytes(sentence + "\n");
+
+        clientSocket.close();
+    }
+}
+
+
+set ns [new Simulator]
+set nf [open tcp_output.nam w]
+$ns namtrace-all $nf
+
+set n0 [$ns node]
+set n1 [$ns node]
+$ns duplex-link $n0 $n1 1Mb 10ms DropTail
+
+set tcp [new Agent/TCP]
+$ns attach-agent $n0 $tcp
+
+set sink [new Agent/TCPSink]
+$ns attach-agent $n1 $sink
+$ns connect $tcp $sink
+
+set ftp [new Application/FTP]
+$ftp attach-agent $tcp
+$ftp start
+
+$ns at 4.0 "finish"
+
+proc finish {} {
+    global ns nf
+    $ns flush-trace
+    close $nf
+    exec nam tcp_output.nam &
+    exit 0
+}
+
+$ns run
+
+
+set ns [new Simulator]
+set nf [open udpoutput.nam w]
+$ns namtrace-all $nf
+
+set n0 [$ns node]
+set n1 [$ns node]
+$ns duplex-link $n0 $n1 1Mb 10ms DropTail
+
+set udp [new Agent/UDP]
+$ns attach-agent $n0 $udp
+
+set null [new Agent/Null]
+$ns attach-agent $n1 $null
+$ns connect $udp $null
+
+set cbr [new Application/Traffic/CBR]
+$cbr attach-agent $udp
+$cbr set packetSize 500
+$cbr set interval_ 0.005
+$cbr start
+
+$ns at 4.0 "finish"
+
+proc finish {} {
+    global ns nf
+    $ns flush-trace
+    close $nf
+    exec nam udp_output.nam &
+    exit 0
+}
+
+$ns run
+
+
+set ns [new Simulator]
+set nf [open threenode.nam w]
+$ns namtrace-all $nf
+
+set n0 [$ns node]
+set n1 [$ns node]
+set n2 [$ns node]
+
+$ns duplex-link $n0 $n1 1Mb 10ms DropTail
+$ns duplex-link $n1 $n2 1Mb 10ms DropTail
+
+set udp [new Agent/UDP]
+set null [new Agent/Null]
+$ns attach-agent $n0 $udp
+$ns attach-agent $n2 $null
+$ns connect $udp $null
+
+set cbr [new Application/Traffic/CBR]
+$cbr attach-agent $udp
+$cbr set packetSize 500
+$cbr set interval 0.005
+$cbr start
+
+$ns at 4.0 "finish"
+
+proc finish {} {
+    global ns nf
+    $ns flush-trace
+    close $nf
+    exec nam three_node.nam &
+    exit 0
+}
+
+$ns run
