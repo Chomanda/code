@@ -1,0 +1,190 @@
+a) Write a python program to perform following operations on an array:  
+- Sum of all even elements  
+- Count the number of elements divisible by 3  
+- Insert 2 elements at the end of the list  
+- Delete all the odd elements from the list
+
+Code:
+arr = [1,2,3,4,5]
+sum = 0
+count = 0
+
+for i in arr:
+    if(i % 2 == 0):
+        sum = sum + i
+print(f"sum of even nos = {sum}")        
+
+for i in arr:
+    if(i % 3 == 0):
+        count += 1
+print(f"nos. divisible by zero = {count}")    
+
+arr.append(6)
+arr.append(7)
+print(arr)
+
+arr = [i for i in arr if i%2==0]
+print (arr)
+
+b) Write a python program to input a multiline string or a paragraph and count the number of words and characters in the string. Also check for a substring and replace each of its occurrences by some other string.
+Code:
+text = input(str("Enter a paragraph: "))
+
+words = text.split()
+print(f"Words are {words}")
+
+characters = len(text)
+print(f"Length of paragraph is {characters}")
+
+old = input(str("Enter a word to be replaced: "))
+new = input(str("Enter new word: "))
+
+ntext = text.replace(old, new)
+print(ntext)
+
+c) Write a recursive function in python to find the sum of the digits of the number.
+Code:
+
+def sum(n):
+    if n == 0:
+        return 0
+    else:
+        return n % 10 + sum(n // 10)
+        
+n = int(input("Enter a number: "))
+print(f"The sum of digits of {n} = {sum(n)}")
+
+d) Write a menu-driven python program to:  
+i) Add students’ marks information in terms of tuples. Calculate the total and average marks.  
+ii) Display students with specified key.  
+iii) Enter students’ admission date in the form (dd/mm/yyyy) to introduce nested tuple. Display students having admission in the same year.
+Code:
+students = {}
+
+while True:
+    print("\nEnter choice")
+    print("1. Add student")
+    print("2. Display Info")
+    print("3. Display all By year")
+    print("4. Exit")
+    
+    ch = int(input("Enter Choice: "))
+    
+    if ch == 1:
+        name = input(str("Enter name: "))
+        marks = tuple(map(int,input("Enter marks seperatede by space: ").split()))
+        year = input("Admission year (dd/mm/yyyy): ")
+        
+        students[name] = (marks, year)
+        
+    elif ch == 2:
+        srch = input("Name of student")
+        
+        if srch in students:
+            print(f"Info: {students[srch]}")
+        else:
+            print("Student not found")
+            
+    elif ch == 3:
+        year = input("Enter year to search (yyyy): ")
+        
+        for name, (marks, date) in students.items():
+            if date.split("/")[-1] == year:
+                print(name)
+                
+    elif ch == 4:
+        break
+    
+    else:
+        print("Invalid choice")
+
+e) Write a menu-driven program to demonstrate the use of set in python:  
+i) Accept two strings from the user.  
+ii) Display common letters in two input strings (set intersection).  
+iii) Display letters which are in the first string but not in the second string (set difference).  
+iv) Display set of all letters from both the strings (set union).  
+v) Display set of letters which are in two strings but not common (Symmetric Difference).
+Code:
+while True:
+    print("\nMenu:")
+    print("1. Accept two strings from the user")
+    print("2. Display common letters (Set intersection)")
+    print("3. Display letters in the first string but not in the second (Set difference)")
+    print("4. Display all letters from both strings (Set union)")
+    print("5. Display letters which are in both strings but not common (Symmetric difference)")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        str1 = input("1st string: ")
+        str2 = input("2nd string: ")
+        
+        a = set(str1)
+        b = set(str2)
+
+    elif choice == '2':
+        print(f"Set Intersection = {a&b}")
+
+    elif choice == '3':
+        print(f"Set Difference = {a-b}")
+
+    elif choice == '4':
+        print(f"Set union = {a|b}")
+
+    elif choice == '5':
+        print(f"Symmetric Difference = {a^b}")
+
+    elif choice == '6':
+        break
+
+    else:
+        print("Invalid choice!")
+
+f) Write a menu-driven program to demonstrate the use of dictionary in python:  
+i) Create key/value pair dictionary.  
+ii) Update/concatenate and delete item from existing dictionary.  
+iii) Find a key and print its value.
+Code:
+dictionary = {}
+
+while True:
+    print("\n1. Add Key-Value Pair")
+    print("2. Update Dictionary")
+    print("3. Delete an Item")
+    print("4. Find a Key")
+    print("5. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        key = input("Enter key: ")
+        value = input("Value")
+        
+        dictionary[key] = value
+        print(f"Dictionary: {dictionary}")
+
+    elif choice == 2:
+        key = input("Enter key: ")
+        new = input("Enter new value")
+        
+        if key in dictionary:
+            dictionary[key] = new
+            print(f"Dictionary: {dictionary}")
+        else:
+            print("Key not present")
+
+    elif choice == 3:
+        key = input("Enter key: ")
+        dictionary.pop(key, None)
+        print(f"Dictionary: {dictionary}")
+
+    elif choice == 4:
+        key = input("Enter key: ")
+        print(f"value: ", dictionary.get(key, "Not Found"))
+
+    elif choice == 5:
+        break
+
+    else:
+        print("Invalid choice! Try again.")
