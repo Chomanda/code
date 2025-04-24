@@ -1,0 +1,206 @@
+Exp - 3
+
+a) Classes, Objects, Constructors, Inner class and Static method  
+Code:
+class Employee:
+    def __init__(self, name, e_id):
+        self.name = name
+        self.e_id = e_id
+        
+    def show(self):
+        print(f"Name = {self.name} and ID = {self.e_id}")
+        
+    class Salary:
+        def __init__(self, salary):
+            self. salary = salary
+            
+        def sal(self):
+            print(f"Salary = {self.salary}")
+            
+    def info():
+        print("Hello")
+        
+e = Employee("daivik", 29)
+e.show()
+
+Employee.info()
+    
+s = e.Salary(1000)
+s.sal()
+
+b) Different types of Inheritance  
+Code:
+# Single Inheritance
+class Parent:
+    def show(self):
+        print("This is the Parent class.")
+
+class Child(Parent):  # Single Inheritance
+    def display(self):
+        print("This is the Child class.")
+
+child = Child()
+child.show()
+child.display()
+
+# Multilevel Inheritance
+class Grandparent:
+    def heritage(self):
+        print("Grandparent's heritage")
+
+class Parent(Grandparent):  # Multilevel Inheritance
+    def profession(self):
+        print("Parent's profession")
+
+class Child(Parent):  # Multilevel Inheritance
+    def hobbies(self):
+        print("Child's hobbies")
+
+child = Child()
+child.heritage()
+child.profession()
+child.hobbies()
+
+# Multiple Inheritance
+class Father:
+    def skill_father(self):
+        print("Father's skill: Cooking")
+
+class Mother:
+    def skill_mother(self):
+        print("Mother's skill: Painting")
+
+class Child(Father, Mother):  # Multiple Inheritance
+    def show(self):
+        print("This is the Child class")
+
+child = Child()
+child.skill_father()
+child.skill_mother()
+child.show()
+
+# Hierarchical Inheritance
+class Parent:
+    def show(self):
+        print("This is the Parent class")
+
+class Child1(Parent):  # Hierarchical Inheritance
+    def display1(self):
+        print("This is Child1 class")
+
+class Child2(Parent):  # Hierarchical Inheritance
+    def display2(self):
+        print("This is Child2 class")
+
+child1 = Child1()
+child1.show()
+child1.display1()
+
+child2 = Child2()
+child2.show()
+child2.display2()
+
+# Hybrid Inheritance
+class A:
+    def show_a(self):
+        print("Class A")
+
+class B:
+    def show_b(self):
+        print("Class B")
+
+class C(A, B):  # Hybrid Inheritance (Multiple from A & B)
+    def show_c(self):
+        print("Class C")
+
+class D(C):  # Hybrid Inheritance (Multilevel)
+    def show_d(self):
+        print("Class D")
+
+d = D()
+d.show_a()
+d.show_b()
+d.show_c()
+d.show_d()
+
+c) Polymorphism using Operator overloading, Method overloading, Method overriding, Abstract class, Abstract method and Interfaces in Python.
+Code:
+
+# -------------------------------
+# 1. Operator Overloading
+# -------------------------------
+class Number:
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):  # Overloading '+' operator
+        return Number(self.value + other.value)
+
+n1 = Number(5)
+n2 = Number(10)
+n3 = n1 + n2
+print("Operator Overloading:", n3.value)  # Output: 15
+
+
+# -------------------------------
+# 2. Method Overloading (Simulated)
+# -------------------------------
+class Greet:
+    def hello(self, name=None):
+        if name:
+            print("Method Overloading:", f"Hello, {name}")
+        else:
+            print("Method Overloading: Hello")
+
+g = Greet()
+g.hello()
+g.hello("Daivik")
+
+
+# -------------------------------
+# 3. Method Overriding
+# -------------------------------
+class Animal:
+    def sound(self):
+        print("Method Overriding: Animal makes a sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Method Overriding: Dog barks")
+
+d = Dog()
+d.sound()
+
+
+# -------------------------------
+# 4. Abstract Class and Abstract Method
+# -------------------------------
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def area(self):
+        print("Abstract Method: Area = πr²")
+
+c = Circle()
+c.area()
+
+
+# -------------------------------
+# 5. Interface (using Abstract Base Class)
+# -------------------------------
+class Vehicle(ABC):
+    @abstractmethod
+    def drive(self):
+        pass
+
+class Car(Vehicle):
+    def drive(self):
+        print("Interface: Car is driving")
+
+car = Car()
+car.drive()
