@@ -1,0 +1,110 @@
+Exp - 4
+
+
+a) Creating User-defined modules/packages and import them in a program  
+Code:
+# mymodule.py
+def greet(name):
+    return f"Hello, {name}!"
+
+def add(a, b):
+    return a + b
+
+
+# main.py
+import mymodule
+
+name = "Alice"
+print(mymodule.greet(name))
+print(f"Sum: {mymodule.add(5, 3)}")
+
+#for package
+
+mypackage/
+    __init__.py
+    mymodule.py
+
+# main.py
+from mypackage import mymodule
+
+name = "Bob"
+print(mymodule.greet(name))
+print(f"Sum: {mymodule.add(10, 7)}")
+
+
+b) Creating user defined multithreaded application with thread synchronization and deadlocks  
+Code:
+import threading
+import time
+
+lock1 = threading.Lock()
+lock2 = threading.Lock()
+
+def thread1():
+    lock1.acquire()
+    time.sleep(1)
+    lock2.acquire()
+    print("Thread 1: Working")
+    lock2.release()
+    lock1.release()
+
+def thread2():
+    lock2.acquire()
+    time.sleep(1)
+    lock1.acquire()
+    print("Thread 2: Working")
+    lock1.release()
+    lock2.release()
+
+t1 = threading.Thread(target=thread1)
+t2 = threading.Thread(target=thread2)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+
+c) Creating a menu driven application which should cover all the exceptions in Python
+Code:
+while True:
+    print("\nMenu:")
+    print("1. Zero Division Error")
+    print("2. Value Error")
+    print("3. File Not Found Error")
+    print("4. Type Error")
+    print("5. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        try:
+            x = 10 / 0
+        except ZeroDivisionError:
+            print("Error: Division by zero is not allowed.")
+    
+    elif choice == '2':
+        try:
+            num = int(input("Enter a number: "))
+        except ValueError:
+            print("Error: Invalid input. Please enter a valid number.")
+    
+    elif choice == '3':
+        try:
+            with open("non_existent_file.txt", "r") as file:
+                content = file.read()
+        except FileNotFoundError:
+            print("Error: File not found.")
+    
+    elif choice == '4':
+        try:
+            x = "string" + 5
+        except TypeError:
+            print("Error: Type mismatch, cannot add string and integer.")
+    
+    elif choice == '5':
+        print("Exiting the program.")
+        break
+    
+    else:
+        print("Invalid choice. Please try again.")
