@@ -1,0 +1,57 @@
+a) Different types of plots using Númpy and Matplotlob 
+Code:
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.figure(figsize=(6,4))
+plt.plot(x, y, label="Sine Wave", color='b')
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title("Line Plot")
+plt.legend()
+plt.show()
+
+categories = ['A', 'B', 'C', 'D']
+values = [10, 15, 7, 12]
+
+plt.bar(categories, values, color='green')
+plt.title("Bar Chart")
+plt.show()
+
+x_scatter = np.random.rand(50)
+y_scatter = np.random.rand(50)
+
+plt.scatter(x_scatter, y_scatter, color='red')
+plt.title("Scatter Plot")
+plt.show()
+
+data = np.random.randn(1000)
+
+plt.hist(data, bins=30, color='purple', alpha=0.7)
+plt.title("Histogram")
+plt.show()
+
+b) Basic operations using pandas like series, data frames, indexing, filtering, combining and merging data frames.
+Code:
+import pandas as pd
+
+data_series = pd.Series([10, 20, 30, 40, 50], index=['A', 'B', 'C', 'D', 'E'])
+print("Pandas Series:\n", data_series)
+
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'City': ['New York', 'London', 'Tokyo']}
+
+df = pd.DataFrame(data)
+print("\nDataFrame:\n", df)
+
+print("\nFiltering Rows (Age > 28):\n", df[df['Age'] > 28])
+
+df2 = pd.DataFrame({'Name': ['Alice', 'Bob', 'David'],
+                    'Salary': [50000, 60000, 70000]})
+
+merged_df = pd.merge(df, df2, on='Name', how='inner')
+print("\nMerged DataFrame:\n", merged_df)
